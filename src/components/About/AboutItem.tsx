@@ -14,10 +14,10 @@ const AboutItem = ({
   description: string;
 }) => {
   return (
-    <div className="bg-white transform transition duration-700 hover:scale-105 p-6 rounded-2xl hover:shadow-xl">
+    <div className="bg-white transform transition duration-700 p-6 rounded-2xl hover:shadow-xl">
       <div className="overflow-hidden rounded-2xl flex flex-grow">
         <img
-          className="transform transition duration-700 hover:scale-125 w-full h-auto"
+          className="transform transition duration-700 hover:scale-105 w-full h-auto"
           src={image}
           alt={title}
         />

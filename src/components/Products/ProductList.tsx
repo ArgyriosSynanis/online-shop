@@ -4,6 +4,9 @@ import axios from 'axios';
 import Loading from '../Loading';
 import useDebounce from '../../hooks/useDebounce';
 import { useQuery } from '@tanstack/react-query';
+import Button from '../Button/Button';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export type ProductItem = {
   id: string;
@@ -48,16 +51,28 @@ const ProductList = () => {
   }, [limit, products]);
 
   return (
-    <section className="my-12 max-w-screen-xl mx-auto px-6">
-      <div className="rounded-full p-1 box-border border border-primary mt-8 bg-white sm:w-96 w-full flex items-center">
-        <input
-          type="text"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className=" rounded-full p-2 focus:outline-none w-full bg-transparent"
-          placeholder="Search here..."
-        />
-      </div>
+    <section className="my-12 max-w-screen-xl mx-auto md:px-6">
+      <form>
+        <label
+          htmlFor="default-search"
+          className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+        >
+          Search
+        </label>
+        <div className="relative">
+          <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <FontAwesomeIcon icon={faSearch} className="mr-2 text-gray-300" />
+          </div>
+          <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            type="search"
+            id="default-search"
+            className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+            placeholder="Search phones, laptops..."
+          />
+        </div>
+      </form>
       {isLoading && <Loading />}
       {products && products.data.products.length === 0 && (
         <p className="text-center text-2xl poppins mt-12">
@@ -80,14 +95,15 @@ const ProductList = () => {
           ))}
       </div>
 
-      <div className="text-center">
+      <div className="text-center mt-14">
         {showLoadButton && (
-          <button
+          <Button
             onClick={handleLoadMore}
-            className="bg-primary text-2xl text-white px-8 py-2 focus:outline-none poppins rounded-full mt-24 transform transition duration-300 hover:scale-105"
+            bgColor="secondary"
+            textSize="text-2xl"
           >
             Load more
-          </button>
+          </Button>
         )}
       </div>
     </section>

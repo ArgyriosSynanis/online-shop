@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 const Rating = ({ rating }: { rating: number }) => {
-  // Function to generate star icons based on the rating
-  const generateStars = () => {
+  const generateStars = useMemo(() => {
     const stars = [];
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 !== 0;
 
-    // Generate full stars
     stars.push(
       ...Array(fullStars).fill(
         <svg
@@ -23,7 +21,6 @@ const Rating = ({ rating }: { rating: number }) => {
       )
     );
 
-    // Generate half star
     if (hasHalfStar) {
       stars.push(
         <svg
@@ -48,7 +45,6 @@ const Rating = ({ rating }: { rating: number }) => {
       );
     }
 
-    // Generate empty stars
     stars.push(
       ...Array(5 - stars.length).fill(
         <svg
@@ -65,14 +61,14 @@ const Rating = ({ rating }: { rating: number }) => {
     );
 
     return stars;
-  };
+  }, [rating]);
 
   return (
-    <div className="flex items-center mt-2.5 mb-5">
-      <div className="flex items-center mt-2.5 mb-5">{generateStars()}</div>
-      <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">
+    <div className="flex items-center">
+      <div className="flex items-center">{generateStars}</div>
+      <p className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">
         {rating}
-      </span>
+      </p>
     </div>
   );
 };

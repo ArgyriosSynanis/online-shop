@@ -27,7 +27,7 @@ const AboutUs = () => {
   }, []);
 
   return (
-    <div className="max-w-screen-xl mx-auto my-12 px-6">
+    <div className="max-w-screen-xl mx-auto mt-32 mb-12 px-6">
       <h1 className="text-4xl poppins pb-4">Why you choose us</h1>
       <p className="text-gray-500 text-sm poppins sm:w-2/4 w-full">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
