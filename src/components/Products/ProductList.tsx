@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import FoodItem from './Product';
+import Product from './Product';
 import axios from 'axios';
 import Loading from '../Loading';
 import useDebounce from '../../hooks/useDebounce';
@@ -12,7 +12,8 @@ export type ProductItem = {
   id: string;
   title: string;
   description: string;
-  price: number;
+  price?: number;
+  totalPrice?: number;
   discountPercentage?: number;
   rating: number;
   stock?: number;
@@ -40,7 +41,6 @@ const ProductList = () => {
     setLimit((prev) => prev + 6);
   };
 
-  // Hide the load more button when the limit is greater than or equal to the total number of products
   useEffect(() => {
     const total = products && products.data.total;
     if (limit >= total) {
@@ -68,7 +68,7 @@ const ProductList = () => {
             onChange={(e) => setSearch(e.target.value)}
             type="search"
             id="default-search"
-            className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+            className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-md bg-gray-50"
             placeholder="Search phones, laptops..."
           />
         </div>
@@ -82,7 +82,7 @@ const ProductList = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-12">
         {products &&
           products.data.products.map((item: ProductItem) => (
-            <FoodItem
+            <Product
               key={item.id}
               id={item.id}
               thumbnail={item.thumbnail}
@@ -95,7 +95,7 @@ const ProductList = () => {
           ))}
       </div>
 
-      <div className="text-center mt-14">
+      <div className="flex justify-center mt-14">
         {showLoadButton && (
           <Button
             onClick={handleLoadMore}

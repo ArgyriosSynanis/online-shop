@@ -1,14 +1,18 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { uiActions } from '../../../store/ui-slice';
+import { RootState, uiActions } from '../../../store/ui-slice';
 import CartItem from './CartItem';
-import Button from '../../Button/Button';
+import { useSelector } from 'react-redux';
+import CartEmpty from './CartEmpty';
 
 const Cart = () => {
   const dispatch = useDispatch();
+  const cartItems = useSelector((state: RootState) => state.cart.items);
   const toggleCartHandler = () => {
     dispatch(uiActions.toggle());
   };
+
+  const total = cartItems.reduce((sum, item) => sum + item.totalPrice, 0);
 
   return (
     <div
@@ -43,27 +47,42 @@ const Cart = () => {
                           className="h-6 w-6"
                           fill="none"
                           viewBox="0 0 24 24"
-                          stroke-width="1.5"
+                          strokeWidth="1.5"
                           stroke="currentColor"
                           aria-hidden="true"
                         >
                           <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                             d="M6 18L18 6M6 6l12 12"
                           />
                         </svg>
                       </button>
                     </div>
                   </div>
-
-                  <CartItem />
+                  {cartItems.length === 0 && (
+                    <CartEmpty toggleCartHandler={toggleCartHandler} />
+                  )}
+                  {cartItems &&
+                    cartItems.map((item) => (
+                      <CartItem
+                        key={item.id}
+                        id={item.id}
+                        title={item.title}
+                        quantity={item.quantity}
+                        price={item.price}
+                        thumbnail={item.thumbnail}
+                        description={item.description}
+                        totalPrice={item.totalPrice}
+                        toggleCartHandler={toggleCartHandler}
+                      />
+                    ))}
                 </div>
 
                 <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                   <div className="flex justify-between text-base font-medium text-gray-900">
                     <p>Subtotal</p>
-                    <p>$262.00</p>
+                    <p className="text-lg font-bold">£{total || 0}</p>
                   </div>
                   <p className="mt-0.5 text-sm text-gray-500">
                     Shipping and taxes calculated at checkout.

@@ -26,7 +26,7 @@ const Button = ({
       onClick={onClick}
       className={`${bg} ${textSize} ${
         hasSpace && 'px-6 py-2'
-      } font-bold focus:outline-none poppins rounded-xl transform transition duration-300 hover:scale-105`}
+      } focus:outline-none poppins rounded-md transform transition duration-300 hover:scale-105 flex space-x-2 items-center`}
     >
       {children}
     </button>

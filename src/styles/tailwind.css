@@ -7,7 +7,7 @@
     @apply text-gray-800 cursor-pointer select-none;
   }
   .active_menu_tab {
-    @apply rounded-xl px-4 py-2 text-white select-none;
+    @apply rounded-md px-4 py-2 text-white select-none;
   }
 }
 @layer base {

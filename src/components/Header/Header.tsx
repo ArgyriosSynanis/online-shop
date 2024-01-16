@@ -1,20 +1,16 @@
 import React from 'react';
-import { RootState, uiActions } from '../../store/ui-slice';
-import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/ui-slice';
+import { useSelector } from 'react-redux';
 import logo from '../../assets/logo.png';
 import { Link } from 'react-router-dom';
 import Cart from './Cart/Cart';
 import Button from '../Button/Button';
+import CartButton from './Cart/CartButton';
 
 const Header = () => {
-  const dispatch = useDispatch();
   const cartIsVisible = useSelector(
     (state: RootState) => state.ui.cartIsVisible
   );
-
-  const toggleCartHandler = () => {
-    dispatch(uiActions.toggle());
-  };
 
   return (
     <header className="fixed z-50 top-0 left-0 w-full transition duration-500 bg-white">
@@ -31,9 +27,7 @@ const Header = () => {
         <div className="relative">
           <div className="flex items-center justify-end sm:space-x-6 space-x-4 py-4">
             <Button>Sign in</Button>
-            <Button onClick={toggleCartHandler} bgColor="secondary">
-              Cart
-            </Button>
+            <CartButton />
           </div>
           {cartIsVisible && <Cart />}
         </div>
