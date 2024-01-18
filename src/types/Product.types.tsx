@@ -4,6 +4,7 @@ export type ProductItem = {
   description?: string;
   price: number;
   totalPrice?: number;
+  totalQuantity?: number;
   discountPercentage?: number;
   rating?: number;
   stock?: number;

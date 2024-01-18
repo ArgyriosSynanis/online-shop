@@ -1,15 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CartItemQuantity from './CartItemQuantity';
+import { ProductItem } from '../../../types/Product.types';
 
-interface CartItemProps {
-  id: string;
-  title: string;
+interface CartItemProps extends ProductItem {
   quantity: number;
-  description: string;
-  price: number;
-  thumbnail: string;
-  totalPrice: number;
   toggleCartHandler: () => void;
 }
 
@@ -17,7 +12,6 @@ const CartItem = ({
   id,
   title,
   quantity,
-  description,
   price,
   thumbnail,
   totalPrice,

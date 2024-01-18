@@ -1,19 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { ProductItem } from '../types/Product.types';
+
+export interface CartItems extends ProductItem {
+  quantity: number;
+}
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
-    items: [] as {
-      id: string;
-      price: number;
-      quantity: number;
-      totalPrice: number;
-      title: string;
-      description: string;
-      thumbnail: string;
-    }[],
+    items: [] as CartItems[],
     totalQuantity: 0,
-    totalPrice: 0,
+    cartTotal: 0,
   },
   reducers: {
     addItemToCart(state, action) {
@@ -36,6 +33,11 @@ const cartSlice = createSlice({
         existingItem.quantity++;
         existingItem.totalPrice = existingItem.totalPrice + newItem.price;
       }
+
+      state.cartTotal = state.items.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+      );
     },
     removeItemFromCart(state, action) {
       const id = action.payload;
@@ -49,12 +51,16 @@ const cartSlice = createSlice({
           (item: { id: string }) => item.id !== id
         );
       } else {
-        if (existingItem) {
+        if (existingItem && existingItem.totalPrice) {
           existingItem.quantity--;
           existingItem.totalPrice =
             existingItem.totalPrice - existingItem.price;
         }
       }
+      state.cartTotal = state.items.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+      );
     },
   },
 });

@@ -7,12 +7,11 @@ import CartEmpty from './CartEmpty';
 
 const Cart = () => {
   const dispatch = useDispatch();
+  const cartTotal = useSelector((state: RootState) => state.cart.cartTotal);
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const toggleCartHandler = () => {
     dispatch(uiActions.toggle());
   };
-
-  const total = cartItems.reduce((sum, item) => sum + item.totalPrice, 0);
 
   return (
     <div
@@ -24,7 +23,10 @@ const Cart = () => {
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
       <div className="fixed inset-0 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+          <div
+            data-testId="cart"
+            className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10"
+          >
             <div className="pointer-events-auto w-screen max-w-md">
               <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                 <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
@@ -40,6 +42,7 @@ const Cart = () => {
                         type="button"
                         className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
                         onClick={toggleCartHandler}
+                        data-testId="close-cart-button"
                       >
                         <span className="absolute -inset-0.5"></span>
                         <span className="sr-only">Close panel</span>
@@ -82,7 +85,7 @@ const Cart = () => {
                 <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                   <div className="flex justify-between text-base font-medium text-gray-900">
                     <p>Subtotal</p>
-                    <p className="text-lg font-bold">£{total || 0}</p>
+                    <p className="text-lg font-bold">£{cartTotal}</p>
                   </div>
                   <p className="mt-0.5 text-sm text-gray-500">
                     Shipping and taxes calculated at checkout.
@@ -98,6 +101,7 @@ const Cart = () => {
                       type="button"
                       className="font-medium text-indigo-600 hover:text-indigo-500"
                       onClick={toggleCartHandler}
+                      data-testId="continue-shopping-button"
                     >
                       Continue Shopping
                       <span aria-hidden="true"> &rarr;</span>

@@ -1,5 +1,10 @@
 import React from 'react';
 import { useAddToCart, useRemoveFromCart } from '../../../hooks/useCartActions';
+import { ProductItem } from '../../../types/Product.types';
+
+interface CartItemQuantityProps extends ProductItem {
+  quantity: number;
+}
 
 const CartItemQuantity = ({
   id,
@@ -7,13 +12,7 @@ const CartItemQuantity = ({
   price,
   title,
   thumbnail,
-}: {
-  id: string;
-  quantity: number;
-  price: number;
-  title: string;
-  thumbnail: string;
-}) => {
+}: CartItemQuantityProps) => {
   const addToCartHandler = useAddToCart();
   const removeFromCartHandler = useRemoveFromCart();
 

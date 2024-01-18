@@ -7,21 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import Button from '../Button/Button';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-export type ProductItem = {
-  id: string;
-  title: string;
-  description: string;
-  price?: number;
-  totalPrice?: number;
-  discountPercentage?: number;
-  rating: number;
-  stock?: number;
-  brand?: string;
-  category: string;
-  thumbnail: string;
-  images?: Array<string>;
-};
+import { ProductItem } from '../../types/Product.types';
 
 const ProductList = () => {
   const [search, setSearch] = useState('');
@@ -73,7 +59,6 @@ const ProductList = () => {
           />
         </div>
       </form>
-      {isLoading && <Loading />}
       {products && products.data.products.length === 0 && (
         <p className="text-center text-2xl poppins mt-12">
           No products found...
@@ -93,6 +78,7 @@ const ProductList = () => {
               rating={item.rating}
             />
           ))}
+        {isLoading && <Loading />}
       </div>
 
       <div className="flex justify-center mt-14">

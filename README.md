@@ -19,6 +19,10 @@ You may also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
+### `npm run cypress:open`
+
+To run e2e tests, you need to run the app in development mode and then run the cypress tests.
+
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
@@ -68,3 +72,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Api used from DummyJson https://dummyjson.com/docs/products

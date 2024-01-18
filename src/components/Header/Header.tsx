@@ -13,7 +13,10 @@ const Header = () => {
   );
 
   return (
-    <header className="fixed z-50 top-0 left-0 w-full transition duration-500 bg-white">
+    <header
+      data-testId="header"
+      className="fixed z-50 top-0 left-0 w-full transition duration-500 bg-white"
+    >
       <nav className="flex items-center max-w-screen-xl mx-auto px-6 ">
         <div className="flex flex-grow ">
           <Link to="/">
@@ -21,13 +24,18 @@ const Header = () => {
               className="sm:w-40 w-28 py-4 cursor-pointer"
               src={logo}
               alt="Red Onion Logo"
+              data-testId="logo"
             />
           </Link>
         </div>
         <div className="relative">
           <div className="flex items-center justify-end sm:space-x-6 space-x-4 py-4">
-            <Button>Sign in</Button>
-            <CartButton />
+            <div data-testId="sign-in-button">
+              <Button>Sign in</Button>
+            </div>
+            <div data-testId="cart-button">
+              <CartButton />
+            </div>
           </div>
           {cartIsVisible && <Cart />}
         </div>
